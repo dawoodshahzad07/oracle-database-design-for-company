@@ -1,0 +1,38 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.env
+.env
+venv/
+ENV/
+*.egg-info/
+
+# VS Code
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Data
+*.csv
+*.xlsx
+*.xls
+*.db
+*.sqlite3
+
+# Logs
+*.log
+
+# Misc
+*.bak
+*.swp
+*.tmp
+
+# Docs
+*.docx
+
+# Ignore node_modules if present
+node_modules/

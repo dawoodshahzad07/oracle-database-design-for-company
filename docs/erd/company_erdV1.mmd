@@ -1,0 +1,17 @@
+erDiagram
+  DEPARTMENT ||--o{ LOCATION : has
+  DEPARTMENT ||--o{ PROJECT : controls
+  LOCATION ||--|| PROJECT : hosts
+  DEPARTMENT ||--o{ EMPLOYEE : has
+  EMPLOYEE ||--o{ DEPENDENT : has
+  EMPLOYEE ||--o{ WORKS_ON : works
+  PROJECT ||--o{ WORKS_ON : has
+  EMPLOYEE ||--o{ DEPARTMENT_MANAGER : manages
+  DEPARTMENT ||--o{ DEPARTMENT_MANAGER : is_managed_by
+  EMPLOYEE ||--o| EMPLOYEE : supervises
+  CUSTOMER }o--|| EMPLOYEE : contacts_salesperson
+  CUSTOMER ||--o{ SALES_ORDER : places
+  SALES_ORDER ||--o{ ORDER_ITEM : contains
+  PRODUCT ||--o{ ORDER_ITEM : appears_in
+  WAREHOUSE ||--o{ INVENTORY : stores
+  PRODUCT ||--o{ INVENTORY : stocked_in 

@@ -1,0 +1,110 @@
+erDiagram
+  DEPARTMENT {
+    NUMBER department_id PK
+    VARCHAR name UK
+  }
+  LOCATION {
+    NUMBER location_id PK
+    NUMBER department_id FK
+    VARCHAR address_line
+    VARCHAR city
+    VARCHAR postcode
+    VARCHAR country
+  }
+  PROJECT {
+    NUMBER project_id PK
+    NUMBER department_id FK
+    NUMBER location_id FK
+    VARCHAR name
+    DATE start_date
+    DATE end_date
+  }
+  EMPLOYEE {
+    NUMBER employee_id PK
+    VARCHAR ni_number UK
+    VARCHAR first_name
+    VARCHAR last_name
+    VARCHAR address_line
+    VARCHAR city
+    VARCHAR postcode
+    VARCHAR email UK
+    VARCHAR phone
+    NUMBER salary
+    DATE date_of_birth
+    DATE start_date
+    DATE leaving_date
+    NUMBER department_id FK
+    NUMBER supervisor_id FK
+  }
+  DEPARTMENT_MANAGER {
+    NUMBER department_id FK
+    NUMBER employee_id FK
+    DATE start_date PK
+    DATE end_date
+  }
+  DEPENDENT {
+    NUMBER dependent_id PK
+    NUMBER employee_id FK
+    VARCHAR first_name
+    DATE date_of_birth
+    VARCHAR relationship
+  }
+  WORKS_ON {
+    NUMBER employee_id PK, FK
+    NUMBER project_id PK, FK
+    NUMBER hours_per_week
+  }
+  CUSTOMER {
+    NUMBER customer_id PK
+    VARCHAR name
+    VARCHAR email
+    VARCHAR phone
+    NUMBER salesperson_id FK
+  }
+  SALES_ORDER {
+    NUMBER order_id PK
+    NUMBER customer_id FK
+    DATE order_date
+  }
+  ORDER_ITEM {
+    NUMBER order_id PK, FK
+    NUMBER product_id PK, FK
+    NUMBER quantity
+    NUMBER unit_price
+  }
+  PRODUCT {
+    NUMBER product_id PK
+    VARCHAR sku UK
+    VARCHAR name
+    NUMBER unit_price
+  }
+  WAREHOUSE {
+    NUMBER warehouse_id PK
+    VARCHAR name UK
+    VARCHAR address_line
+    VARCHAR city
+    VARCHAR postcode
+    VARCHAR country
+  }
+  INVENTORY {
+    NUMBER warehouse_id PK, FK
+    NUMBER product_id PK, FK
+    NUMBER quantity
+  }
+
+  DEPARTMENT ||--o{ LOCATION : has
+  DEPARTMENT ||--o{ PROJECT : controls
+  LOCATION ||--|| PROJECT : hosts
+  DEPARTMENT ||--o{ EMPLOYEE : has
+  EMPLOYEE ||--o{ DEPENDENT : has
+  EMPLOYEE ||--o{ WORKS_ON : works
+  PROJECT ||--o{ WORKS_ON : includes
+  EMPLOYEE ||--o{ DEPARTMENT_MANAGER : manages
+  DEPARTMENT ||--o{ DEPARTMENT_MANAGER : is_managed_by
+  EMPLOYEE ||--o| EMPLOYEE : supervises
+  CUSTOMER }o--|| EMPLOYEE : contacts
+  CUSTOMER ||--o{ SALES_ORDER : places
+  SALES_ORDER ||--o{ ORDER_ITEM : contains
+  PRODUCT ||--o{ ORDER_ITEM : appears_in
+  WAREHOUSE ||--o{ INVENTORY : stores
+  PRODUCT ||--o{ INVENTORY : stocked_in 

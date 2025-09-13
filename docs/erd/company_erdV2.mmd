@@ -1,0 +1,73 @@
+erDiagram
+  DEPARTMENT {
+    NUMBER department_id PK
+    VARCHAR name UK
+  }
+  LOCATION {
+    NUMBER location_id PK
+    NUMBER department_id FK
+    VARCHAR address_line
+    VARCHAR city
+  }
+  PROJECT {
+    NUMBER project_id PK
+    NUMBER department_id FK
+    NUMBER location_id FK
+    VARCHAR name
+  }
+  EMPLOYEE {
+    NUMBER employee_id PK
+    VARCHAR ni_number UK
+    VARCHAR first_name
+    VARCHAR last_name
+    NUMBER department_id FK
+    NUMBER supervisor_id FK
+  }
+  WORKS_ON {
+    NUMBER employee_id PK, FK
+    NUMBER project_id PK, FK
+    NUMBER hours_per_week
+  }
+  CUSTOMER {
+    NUMBER customer_id PK
+    VARCHAR name
+    NUMBER salesperson_id FK
+  }
+  SALES_ORDER {
+    NUMBER order_id PK
+    NUMBER customer_id FK
+  }
+  ORDER_ITEM {
+    NUMBER order_id PK, FK
+    NUMBER product_id PK, FK
+    NUMBER quantity
+    NUMBER unit_price
+  }
+  PRODUCT {
+    NUMBER product_id PK
+    VARCHAR sku UK
+    VARCHAR name
+  }
+  WAREHOUSE {
+    NUMBER warehouse_id PK
+    VARCHAR name UK
+  }
+  INVENTORY {
+    NUMBER warehouse_id PK, FK
+    NUMBER product_id PK, FK
+    NUMBER quantity
+  }
+
+  DEPARTMENT ||--o{ LOCATION : has
+  DEPARTMENT ||--o{ PROJECT : controls
+  LOCATION ||--|| PROJECT : hosts
+  DEPARTMENT ||--o{ EMPLOYEE : has
+  EMPLOYEE ||--o{ WORKS_ON : works
+  PROJECT ||--o{ WORKS_ON : includes
+  EMPLOYEE ||--o| EMPLOYEE : supervises
+  CUSTOMER }o--|| EMPLOYEE : contacts
+  CUSTOMER ||--o{ SALES_ORDER : places
+  SALES_ORDER ||--o{ ORDER_ITEM : contains
+  PRODUCT ||--o{ ORDER_ITEM : appears_in
+  WAREHOUSE ||--o{ INVENTORY : stores
+  PRODUCT ||--o{ INVENTORY : stocked_in 

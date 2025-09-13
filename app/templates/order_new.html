@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>New Order</h2>
+<form method="post">
+  <label>Customer
+    <select name="customer_id" required>
+      <option value="">-- select --</option>
+      {% for c in customers %}
+      <option value="{{ c[0] }}">{{ c[1] }}</option>
+      {% endfor %}
+    </select>
+  </label>
+
+  <h3>Items</h3>
+  <div id="items">
+    {% for i in range(3) %}
+    <div class="item-row">
+      <select name="product_id">
+        <option value="">-- product --</option>
+        {% for p in products %}
+        <option value="{{ p[0] }}">{{ p[1] }} - {{ p[2] }}</option>
+        {% endfor %}
+      </select>
+      <input name="quantity" type="number" min="1" step="1" placeholder="Qty" />
+    </div>
+    {% endfor %}
+  </div>
+
+  <button type="submit">Place Order</button>
+</form>
+{% endblock %} 

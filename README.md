@@ -1,6 +1,6 @@
 # Company Database Project (Oracle + PL/SQL + Flask)
 
-This project implements the "Company Database" per the coursework brief (ERD, DDL/DML, PL/SQL, views, and a minimal front-end).
+This project implements the "Company Database" (ERD, DDL/DML, PL/SQL, views, and a minimal front-end).
 
 ## Contents
 - `db/ddl/`: Tables and constraints
